@@ -26,7 +26,7 @@ cart.add(sku.id, 2);
 // display cart contents
 const { items } = cart.getContents(); // { items: [{ id: 'UUID-SKU-ID', name: 'SKU Name', price: 51.98, quantity: 2 }] }
 // display cart totals at checkout
-const { subtotal, tax, total } = cart.getTotals(); // { subtotal: 103.96, tax: 10.40, total: 114.36 }
+const { shipping, subtotal, tax, total } = cart.getTotals(); // { shipping: 0, subtotal: 103.96, tax: 10.40, total: 114.36 }
 
 const checkoutBilling = new Billing(User.id, cart.id);
 
