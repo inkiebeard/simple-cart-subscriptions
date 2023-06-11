@@ -1,8 +1,13 @@
 export type Cart = {
-  [skuId: string]: {
-    quantity: number,
-    price: number,
-    name: string,
+  items: {
+    [skuId: string]: {
+      quantity: number,
+      price: number,
+      name: string,
+      description: string,
+      images: string[],
+      salePrice?: number,
+    }
   }
 }
 

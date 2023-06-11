@@ -1,4 +1,5 @@
 import { v4 as uuid } from 'uuid';
+import { add, remove, updateInPlace } from '../utils/metadata';
 
 export interface IAddress {
   id: string;
@@ -15,6 +16,9 @@ export interface IAddress {
   metadata: {
     [key: string]: any;
   }
+  updateMetadata(metadata: { [key: string]: any }): void;
+  addMetadata(key: string, value: any): void;
+  removeMetadata(key: string): void;
 }
 
 class Address implements IAddress {
@@ -43,6 +47,15 @@ class Address implements IAddress {
     this.created = new Date();
     this.updated = new Date();
     this.metadata = metadata || {};
+  }
+  updateMetadata(metadata: { [key: string]: any; }): void {
+    updateInPlace(this)(metadata)
+  }
+  addMetadata(key: string, value: any): void {
+    add(this)(key, value)
+  }
+  removeMetadata(key: string): void {
+    remove(this)(key)
   }
 }
 

@@ -6,5 +6,7 @@ export default {
   ui: {
     cart: SCSCart,
   },
-  api: {}
+  api: {
+    
+  }
 }

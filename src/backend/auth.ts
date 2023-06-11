@@ -1,6 +1,6 @@
 import jwt, { Secret } from 'jsonwebtoken';
 import User from './models/User';
-import { compare, hash } from './utils';
+import { hashing } from './utils';
 import { Request, Response, NextFunction } from 'express';
 import { AuthRequest } from './types';
 
@@ -40,7 +40,7 @@ export const login = async (req: Request, res: Response) => {
         return;
     }
     const { hash: storedHash, salt: storedSalt } = user;
-    const result = await compare(password, storedHash, storedSalt);
+    const result = await hashing.compare(password, storedHash, storedSalt);
     if (!result) {
         res.status(401).send('Unauthorized');
         return;
@@ -51,7 +51,7 @@ export const login = async (req: Request, res: Response) => {
 
 export const register = async (req: Request, res: Response) => {
   const { email, password, name } = req.body;
-  const { hash: passHash, salt } = await hash(password);
+  const { hash: passHash, salt } = await hashing.hash(password);
   const user = new User(
     email,
     name,
